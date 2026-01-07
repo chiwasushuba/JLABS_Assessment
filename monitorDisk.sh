@@ -1,18 +1,12 @@
 #!/bin/bash
 
-target="/"
+threshold=80
 
-echo "Monitoring $target. Press Ctrl + C to stop"
+USAGE=$(df / | grep / | awk '{ print $5 }' | sed 's/%//g')
 
-while true; do
 
-        usage=$(df -h "$target" | awk 'NR==2 {print $5}' | tr -d '%')
-
-        if [ "$usage" -ge 80 ]; then
-                echo "Warning: Disk usage on $target is at ${usage}%"
-        else
-                echo "Below threshold on $target is at ${usage}%"
-        fi
-
-        sleep 60
-done
+if [ "$USAGE" -gt "$threshold" ]; then
+        echo "Warning: Disk Usage exceeds 80% capacity and is at ${USAGE}%."
+else
+        echo "Disk usage is below 80% threshold at ${USAGE}."
+fi
