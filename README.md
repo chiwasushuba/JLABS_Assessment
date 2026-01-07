@@ -1,10 +1,7 @@
-To run the monitorDisk.sh:
+To run the monitorDisk.sh
 
-First configure what directory you want in the bash itself put it in the target=" {here} " to monitor this part
+just do ./monitorDisk.sh in the directory it's in.
 
-
-Option 1:
-bash monitorDisk.sh
-
-Option 2:
-wsl bash monitorDisk.sh
+(Optional: You can also just make a cronjob):
+1.)  Input this in terminal: crontab -e
+2.)  Input this at the very bottom: 0 * * * * /directory/monitor_disk.sh >> /directory/disk_log.txt
